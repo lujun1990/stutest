@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: docker
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+logging:
+  level:
+    demo: info
+---
+spring:
+  profiles: development
+  application:
+    name: online-store-web
+    description: Spring Cloud Demo dev env
+    version: ${spring.application.description} @project.version@
+
+    ##remote url config
+    remoteHost: localhost
+    remotePort: 8080
+    remoteGetStockNoSyncUrl: http://${spring.application.remoteHost}:${spring.application.remotePort}/v1/stock/getStockNoSync
+    remoteModifyStockStateUrl: http://${spring.application.remoteHost}:${spring.application.remotePort}/v1/stock/modifyStockState/
+---
+spring:
+  profiles: docker
+  application:
+    name: online-store-web
+    description: Spring Cloud Demo docekr env
+    version: ${spring.application.description} @project.version@
+    ##remote url config
+    remoteHost: localhost
+    remotePort: 8080
+    remoteGetStockNoSyncUrl: http://${spring.application.remoteHost}:${spring.application.remotePort}/v1/stock/getStockNoSync
+    remoteModifyStockStateUrl: http://${spring.application.remoteHost}:${spring.application.remotePort}/v1/stock/modifyStockState/
